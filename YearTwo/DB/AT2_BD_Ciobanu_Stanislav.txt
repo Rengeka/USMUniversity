@@ -1,0 +1,112 @@
+
+-- 1
+
+-- Если добавлять таблицу с праздниками
+
+CREATE TABLE holidays (
+    holiday_date DATE PRIMARY KEY
+);
+
+INSERT INTO holidays (holiday_date) VALUES 
+('2025-01-01'), 
+('2025-05-01'), 
+('2025-12-25'); 
+
+-- Через for each row - неоптимизированный вариант
+
+CREATE OR REPLACE FUNCTION prevent_sale_on_holiday()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM holidays WHERE holiday_date = NEW.data) THEN
+        RAISE EXCEPTION 'Can not enter data on holidays';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_no_sale_on_holiday
+BEFORE INSERT ON sale
+FOR EACH ROW
+EXECUTE FUNCTION prevent_sale_on_holiday();
+
+-- Через for each statement - тут проверка будет только для изменяемой строки
+
+CREATE OR REPLACE FUNCTION prevent_sale_on_holiday()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 
+        FROM inserted_data
+        WHERE TO_DATE(data, 'DD.MM.YY') IN (SELECT holiday_date FROM holidays)
+    THEN
+        RAISE EXCEPTION 'Can not enter data on holidays';
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Операторный тригер
+
+CREATE TRIGGER trg_no_sale_on_holiday
+AFTER INSERT ON sale
+REFERENCING NEW TABLE AS inserted_data
+FOR EACH STATEMENT
+EXECUTE FUNCTION prevent_sale_on_holiday();
+
+-- Если не добавлять таблицу с праздниками и просто "захардкодить" даты
+
+CREATE OR REPLACE FUNCTION prevent_sale_on_holiday()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.data IN (
+        DATE '2025-01-01', 
+        DATE '2025-05-01', 
+        DATE '2025-12-25'  
+    ) THEN
+        RAISE EXCEPTION 'Can not enter data on holidays';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_no_sale_on_holiday
+BEFORE INSERT ON sale
+FOR EACH ROW
+EXECUTE FUNCTION prevent_sale_on_holiday();
+
+-- 2
+
+CREATE VIEW customer_info AS
+SELECT 
+    c.c_name AS name,
+    co.Country AS country
+    c.address AS address
+FROM customer c
+JOIN country co ON c.cn_id = co.cn_id;
+
+--- 3
+
+CREATE OR REPLACE FUNCTION insert_customer_through_view()
+RETURNS TRIGGER AS $$
+DECLARE
+    country_id INT;
+BEGIN
+    SELECT cn_id INTO country_id FROM country WHERE country = NEW.country;
+    
+    IF country_id IS NULL THEN
+        RAISE EXCEPTION 'Country "%" not found', NEW.country;
+    END IF;
+
+    INSERT INTO customer (c_name, cn_id, address)
+    VALUES (NEW.last_name, country_id, NEW.address);
+
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_insert_customer_view
+INSTEAD OF INSERT ON customer_info
+FOR EACH ROW
+EXECUTE FUNCTION insert_customer_through_view();
+
+

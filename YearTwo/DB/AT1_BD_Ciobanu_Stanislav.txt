@@ -1,0 +1,128 @@
+
+Database setup:
+
+CREATE TABLE Country(
+    c_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Supplier(
+    s_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    c_id INT,
+    address VARCHAR(255),
+    phone VARCHAR(20),
+    FOREIGN KEY (c_id) REFERENCES Country(c_id)
+)
+
+CREATE TABLE Manufact(
+    m_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    c_id INT,
+    FOREIGN KEY (c_id) REFERENCES Country(c_id)
+);
+
+CREATE TABLE Product(
+    p_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    measurement VARCHAR(50),
+    date DATE,
+    term INTERVAL,
+    m_id INT,
+    FOREIGN KEY (m_id) REFERENCES Manufact(m_id)
+);
+
+CREATE TABLE Client(
+    cl_id INT PRIMARY KEY,
+    LastName VARCHAR(100) NOT NULL,
+    c_id INT,
+    address VARCHAR(255),
+    phone VARCHAR(20),
+    FOREIGN KEY (c_id) REFERENCES Country(c_id)
+);
+
+CREATE TABLE Order (
+    o_id INT PRIMARY KEY,
+    s_id INT,
+    p_id INT,
+    cl_id INT,
+    quantity INT,
+    date DATE,
+    FOREIGN KEY (s_id) REFERENCES Supplier(s_id),
+    FOREIGN KEY (p_id) REFERENCES Product(p_id),
+    FOREIGN KEY (cl_id) REFERENCES Client(cl_id)
+);
+
+CREATE TABLE City(
+    ci_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    c_id INT,  -- Связь с Country
+    FOREIGN KEY (c_id) REFERENCES Country(c_id)
+);
+
+CREATE TABLE Employee(
+    e_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    position VARCHAR(100),
+    ci_id INT, 
+    FOREIGN KEY (ci_id) REFERENCES City(ci_id)
+);
+
+Task 1 :
+
+DELIMITER $$
+
+CREATE PROCEDURE GetSoldProductsBySupplier(IN supplier_id INT)
+BEGIN
+    DECLARE supplier_exists INT;
+    
+    SELECT COUNT(*) INTO supplier_exists
+    FROM Suplier
+    WHERE s_id = supplier_id;
+    
+    IF supplier_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No suppliers found!';
+    ELSE
+        SELECT 
+            SUM(o.quantity) AS total_sold_quantity
+        FROM 
+            `Order` o
+        JOIN 
+            Supplier s ON o.s_id = s.s_id
+        WHERE 
+            s.s_id = supplier_id;
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+Task 2 : 
+
+DELIMITER $$
+
+CREATE PROCEDURE CountEmployeesByCity()
+BEGIN
+    DECLARE employee_count INT;
+
+    SELECT COUNT(*) INTO employee_count FROM Employee;
+    
+    IF employee_count = 0 THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'No employees found!';
+    ELSE
+        SELECT 
+            c.name AS CityName,
+            COUNT(e.e_id) AS TotalEmployees
+        FROM 
+            City c
+        LEFT JOIN 
+            Employee e ON c.ci_id = e.ci_id
+        GROUP BY 
+            c.ci_id;
+    END IF;
+END $$
+
+DELIMITER ;

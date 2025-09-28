@@ -1,0 +1,135 @@
+-- 1.
+create view employees_chicago as
+select sp_name, comm
+from sperson
+where of_id = (select of_id from office where office = 'chicago');
+
+-- 2.
+create view clients_fulladdress as
+select c.c_name, 
+       concat(cn.country, ', ', c.city) as full_address
+from customer c
+join country cn on c.cn_id = cn.cn_id;
+
+-- 3.
+create view products_sold_15_25 as
+select p.p_desc, m.m_name, s.sale_price
+from product p
+join manufact m on p.m_id = m.m_id
+join sale s on s.p_id = p.p_id
+where s.quantity between 15 and 25;
+
+-- 4.
+create view office_sales as
+select o.city as office_city, count(s.sale_id) as sales_count
+from office o
+join sperson s on o.of_id = s.of_id
+group by o.city;
+
+-- 5.
+create view manufacturer_stats as
+select m.m_name, 
+       count(p.p_id) as product_count, 
+       sum(p.cost) as total_cost
+from manufact m
+join product p on m.m_id = p.m_id
+group by m.m_name;
+
+-- 6.
+create view products_with_increased_cost as
+select m.m_name as manufacturer_name, 
+       p.p_desc as product_name, 
+       p.cost * 1.1 as increased_cost
+from product p
+join manufact m on p.m_id = m.m_id;
+
+-- 7.
+create view all_employees as
+select * 
+from sperson;
+
+-- 8.
+update all_employees
+set comm = comm * 1.02;
+
+-- 9.
+select sperson.sp_id, 
+       sperson.sp_name
+from sperson
+where sperson.sp_id in (
+    select sp_id 
+    from sale 
+    group by sp_id 
+    having sum(qty) <= 75
+);
+
+-- 10.
+select p_desc 
+from product 
+where price < (select avg(price) from product);
+
+-- 11.
+select distinct sperson.sp_name as manager_name, 
+                office.office as region
+from sperson
+join office on sperson.of_id = office.of_id
+where sperson.sp_id in ( 
+    select sperson.man_id
+    from sperson
+    where sperson.sp_id in ( 
+        select sp_id
+        from sale
+        where p_id = (select p_id from product where p_desc = 'Свитера')
+    ) and sperson.man_id is not null
+);
+
+-- 12.
+select top 3 
+   sp_name, 
+   comm
+from sperson
+order by comm desc;
+
+-- 13.
+select c_id, 
+       c_name
+from customer
+intersect
+select distinct c_id, 
+                c_name
+from sale 
+join customer using (c_id);
+
+-- 14.
+select sp_id, 
+       sp_name
+from sperson
+intersect
+select distinct sp_id, 
+                sp_name
+from sale 
+join sperson using (sp_id);
+
+-- 15.
+select sp_id, 
+       sp_name
+from sperson
+minus
+select distinct sp_id, 
+                sp_name
+from sale 
+join sperson using (sp_id);
+
+-- 16.
+select 'SALE' as table_name, 
+       count(*) as record_count
+from sale
+union all
+select 'PRODUCT', 
+       count(*)
+from product
+union all
+select 'SPERSON', 
+       count(*)
+from sperson
+order by record_count asc;

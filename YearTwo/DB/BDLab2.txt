@@ -1,0 +1,72 @@
+-- 1
+
+select 
+    sp_name,
+    comm
+from sperson
+where sp_name like 'B%'
+
+-- 2
+
+select 
+    sp_name,
+    comm
+from sperson
+where sp_name like '%s'
+
+-- 3
+
+select 
+    sp_name,
+    comm
+from sperson
+where sp_name like '_a%s'
+
+-- 4
+
+select sp_name 
+from sperson
+where of_id = 13
+and comm = 10
+
+-- 5
+
+select sp_name
+from sperson
+where comm in (10,15,9)
+
+-- 6
+
+select sp_name
+from sperson 
+where of_id = 12
+and comm != 10
+
+-- 7
+
+select 
+    c_name,
+    cn_id
+from customer
+where cn_id in (1,4,6)
+
+-- 8
+
+select p_desc
+from product 
+where p_desc like 'D%p'
+
+-- 9
+
+select  
+    p_desc,
+    cost
+from product
+where cost > 200
+and cost < 400
+
+-- 10
+
+select
+    sp_name + ' , ' + comm as sp_name_comm
+from sperson

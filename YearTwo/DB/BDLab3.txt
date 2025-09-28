@@ -1,0 +1,175 @@
+--1.1
+
+select distinct
+    customer.c_id,
+    customer.c_name
+from customer
+join sale on sale.c_id = customer.c_id
+join product on sale.p_id = product.p_id
+where p_desc = 'Desc lamp'
+
+--1.2
+
+
+select distinct
+    customer.c_id,
+    customer.c_name
+from customer, sale, product
+where customer.c_id = sale.c_id
+and sale.p_id = product.p_id
+and p_desc = 'Desc lamp'
+
+--1.3
+
+select distinct
+    c_id,
+    c_name
+from customer
+where c_id in 
+    (select c_id 
+    from sale
+    where p_id in
+        (select p_id
+        from product
+        where p_desc = 'Desc lamp'))
+
+--2.1
+
+select 
+    manufact.m_name
+from manufact
+join product on manufact.m_id = product.m_id
+where product.p_desc = 'Bronze sculpture'
+
+--2.2
+
+select 
+    m_name
+from manufact, product
+where manufact.m_id = product.m_id
+and p_desc = 'Bronze sculpture'
+
+--2.3
+
+select 
+    m_name
+from manufact
+where m_id in 
+    (select m_id 
+    from product
+    where p_desc = 'Bronze sculpture')
+
+--3.1
+
+select distinct
+    customer.c_id,
+    customer.c_name
+from customer
+join sale on sale.c_id = customer.c_id
+join product on sale.p_id = product.p_id
+join manufact on manufact.m_id = product.m_id
+where manufact.m_name = 'Lampy Lama'
+
+--3.2
+
+select distinct
+    customer.c_id,
+    customer.c_name
+from customer, sale, product, manufact
+where sale.c_id = customer.c_id
+and sale.p_id = product.p_id
+and manufact.m_id = product.m_id
+and manufact.m_name = 'Lampy Lama'
+
+--3.3
+
+select distinct
+    c_id,
+    c_name
+from customer
+where c_id in 
+    (select c_id
+    from sale
+    where p_id in 
+        (select p_id
+        from product
+        where m_id in
+            (select m_id
+            from manufact
+            where m_name = 'Lampy Lama')))
+
+--4.1
+
+select distinct
+    sperson.sp_name
+from sperson
+join sale on sale.sp_id = sperson.sp_id
+join product on sale.p_id = product.p_id
+join manufact on manufact.m_id = product.m_id
+join country on country.cn_id = manufact.cn_id
+where country.country = 'Peru'
+
+
+--4.2
+
+select distinct
+    sperson.sp_name
+from sperson, sale, product, manufact, country
+where sperson.sp_id = sale.sp_id
+and sale.p_id = product.p_id
+and manufact.m_id = product.m_id
+and country.cn_id = manufact.cn_id
+and country.country = 'Peru'
+
+--4.3
+
+select distinct
+    sp_name
+from sperson
+where sp_id in 
+    (select sp_id
+    from sale
+    where p_id in 
+        (select p_id 
+        from product
+        where m_id in 
+            (select m_id
+            from manufact
+            where cn_id = 
+                (select cn_id
+                from country
+                where country.country = 'Peru'))))
+
+--5.1
+
+select distinct
+    customer.c_id,
+    customer.c_name
+from customer
+join sale on customer.c_id = sale.c_id
+join sperson on sale.sp_id = sperson.sp_id
+where sperson.sp_name = 'Rodny Djons'
+
+--5.2
+
+select distinct
+    customer.c_id,
+    customer.c_name
+from customer, sale, sperson
+where customer.c_id = sale.c_id
+and sale.sp_id = sperson.sp_id
+and sperson.sp_name = 'Rodny Djons'
+
+--5.3
+
+select distinct
+    c_id,
+    c_name
+from customer
+where c_id in
+    (select c_id
+    from sale
+    where sp_id in
+        (select sp_id
+        from sperson
+        where sperson.sp_name = 'Rodny Djons'))

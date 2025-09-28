@@ -1,0 +1,101 @@
+--1.
+
+select 
+   sperson.sp_id, 
+   sperson.sp_name 
+from sperson  
+where sperson.sp_id in (
+  select sp_id 
+  from sale 
+  group by sp_id 
+  having sum(qty) <= 75 
+)
+
+--2. 
+
+select p_desc 
+from product 
+where price < select avg(price) from product)
+
+--3.
+
+select distinct 
+   sperson.sp_name as manager_name, 
+   office.office as region 
+from sperson 
+join office on sperson.of_id = office.of_id 
+wherem.sp_id in ( 
+   select sperson.man_id 
+   from sperson  
+   where sperson.sp_id in ( 
+      select sp_id 
+      from sale 
+      where p_id = (
+	  select p_id 
+          from product 
+          where p_desc = 'Свитера') 
+  ) and sperson.man_id is not null
+)
+
+--4.
+
+select top 3 
+   sp_name, 
+   comm 
+from sperson 
+order BY comm desc 
+
+--5.
+
+select 
+   c_id, 
+   c_name 
+from customer 
+intersect
+select distinct 
+   c_id, 
+   c_name 
+from sale join customer using (c_id)
+
+--6.
+
+select 
+   sp_id, 
+   sp_name 
+from sperson 
+intersect
+select distinct 
+   sp_id, 
+   sp_name 
+from sale join sperson using (sp_id)
+
+--7.
+
+select 
+   sp_id, 
+   sp_name 
+from sperson 
+minus
+select distinct 
+   sp_id, 
+   sp_name 
+from sale 
+join sperson using (sp_id)
+
+--8.
+
+select 
+   'SALE' as table_name, 
+   count(*) as record_count 
+from sale
+union all 
+select 
+   'PRODUCT', 
+    count(*) 
+from product 
+union all
+select 
+   'SPERSON', 
+   count(*) 
+from sperson 
+order by record_count asc;

@@ -1,0 +1,147 @@
+
+CREATE TABLE DEPT (
+    d_no NUMBER PRIMARY KEY,
+    d_name VARCHAR2(50),
+    location VARCHAR2(50)
+);
+
+CREATE TABLE EMP (
+    e_no NUMBER PRIMARY KEY,
+    e_name VARCHAR2(50),
+    date_hire DATE,
+    salary NUMBER(10, 2),
+    address VARCHAR2(50),
+    d_no NUMBER REFERENCES DEPT(d_no)
+);
+
+INSERT INTO DEPT VALUES (1, 'Soft', 'Chicago');
+INSERT INTO DEPT VALUES (2, 'Sales', 'Dallas');
+INSERT INTO DEPT VALUES (3, 'Administration', 'New-York');
+
+INSERT INTO EMP VALUES (100100, 'Petrov', TO_DATE('15/03/2011', 'DD/MM/YYYY'), 2000, 'AA', 1);
+INSERT INTO EMP VALUES (100101, 'Smirnov', TO_DATE('12/01/2012', 'DD/MM/YYYY'), 1600, 'VB', 1);
+INSERT INTO EMP VALUES (100102, 'Carry', TO_DATE('20/07/2005', 'DD/MM/YYYY'), 2000, 'AW', 1);
+INSERT INTO EMP VALUES (100103, 'Djefferson', TO_DATE('15/09/2011', 'DD/MM/YYYY'), 1500, 'RE', 2);
+INSERT INTO EMP VALUES (100104, 'Smith', TO_DATE('14/11/2015', 'DD/MM/YYYY'), 1200, 'FG', 2);
+INSERT INTO EMP VALUES (100105, 'Gordon', TO_DATE('13/12/2011', 'DD/MM/YYYY'), 1400, 'NJ', 3);
+INSERT INTO EMP VALUES (100106, 'Clark', TO_DATE('10/02/2010', 'DD/MM/YYYY'), 1500, 'PO', 3);
+
+COMMIT;
+
+CREATE OR REPLACE PACKAGE PKG_DEPT AS
+  PROCEDURE CreateDept(p_dno NUMBER, p_dname VARCHAR2, p_location VARCHAR2);
+  FUNCTION CountEmployeesInDept(p_dno NUMBER) RETURN NUMBER;
+  PROCEDURE CountEmployeesInAllDepts;
+  PROCEDURE RenameDept(p_dno NUMBER, p_newName VARCHAR2);
+  PROCEDURE MoveDept(p_dno NUMBER, p_newLocation VARCHAR2);
+END PKG_DEPT;
+/
+
+CREATE OR REPLACE PACKAGE BODY PKG_DEPT AS
+
+  PROCEDURE CreateDept(p_dno NUMBER, p_dname VARCHAR2, p_location VARCHAR2) IS
+  BEGIN
+    INSERT INTO DEPT (d_no, d_name, location)
+    VALUES (p_dno, p_dname, p_location);
+    COMMIT;
+  END;
+
+  FUNCTION CountEmployeesInDept(p_dno NUMBER) RETURN NUMBER IS
+    v_count NUMBER;
+  BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM EMP
+    WHERE d_no = p_dno;
+    RETURN v_count;
+  END;
+
+  PROCEDURE CountEmployeesInAllDepts IS
+  BEGIN
+    FOR rec IN (SELECT d.d_name, COUNT(e.e_no) AS emp_count
+                FROM DEPT d
+                LEFT JOIN EMP e ON d.d_no = e.d_no
+                GROUP BY d.d_name) LOOP
+      DBMS_OUTPUT.PUT_LINE('Отдел: ' || rec.d_name || ' - Сотрудников: ' || rec.emp_count);
+    END LOOP;
+  END;
+
+  PROCEDURE RenameDept(p_dno NUMBER, p_newName VARCHAR2) IS
+  BEGIN
+    UPDATE DEPT
+    SET d_name = p_newName
+    WHERE d_no = p_dno;
+    COMMIT;
+  END;
+
+  PROCEDURE MoveDept(p_dno NUMBER, p_newLocation VARCHAR2) IS
+  BEGIN
+    UPDATE DEPT
+    SET location = p_newLocation
+    WHERE d_no = p_dno;
+    COMMIT;
+  END;
+
+END PKG_DEPT;
+/
+
+CREATE OR REPLACE PACKAGE PKG_EMP AS
+  PROCEDURE AddEmployee(p_eno NUMBER, p_ename VARCHAR2, p_date_hire DATE, p_salary NUMBER, p_address VARCHAR2, p_dno NUMBER);
+  PROCEDURE UpdateSalary(p_eno NUMBER, p_amount NUMBER);
+  FUNCTION AnnualSalary(p_eno NUMBER) RETURN NUMBER;
+  FUNCTION AnnualSalaryDept(p_dno NUMBER) RETURN NUMBER;
+  PROCEDURE TransferEmployee(p_eno NUMBER, p_newDno NUMBER);
+END PKG_EMP;
+/
+
+CREATE OR REPLACE PACKAGE BODY PKG_EMP AS
+
+  PROCEDURE AddEmployee(p_eno NUMBER, p_ename VARCHAR2, p_date_hire DATE, p_salary NUMBER, p_address VARCHAR2, p_dno NUMBER) IS
+  BEGIN
+    INSERT INTO EMP (e_no, e_name, date_hire, salary, address, d_no)
+    VALUES (p_eno, p_ename, p_date_hire, p_salary, p_address, p_dno);
+    COMMIT;
+  END;
+
+  PROCEDURE UpdateSalary(p_eno NUMBER, p_amount NUMBER) IS
+  BEGIN
+    UPDATE EMP
+    SET salary = salary + p_amount
+    WHERE e_no = p_eno;
+    COMMIT;
+  END;
+
+  FUNCTION AnnualSalary(p_eno NUMBER) RETURN NUMBER IS
+    v_annual_salary NUMBER;
+  BEGIN
+    SELECT salary * 12
+    INTO v_annual_salary
+    FROM EMP
+    WHERE e_no = p_eno;
+    RETURN v_annual_salary;
+  END;
+
+  FUNCTION AnnualSalaryDept(p_dno NUMBER) RETURN NUMBER IS
+    v_total_salary NUMBER;
+  BEGIN
+    SELECT SUM(salary) * 12
+    INTO v_total_salary
+    FROM EMP
+    WHERE d_no = p_dno;
+    RETURN v_total_salary;
+  END;
+
+  PROCEDURE TransferEmployee(p_eno NUMBER, p_newDno NUMBER) IS
+  BEGIN
+    UPDATE EMP
+    SET d_no = p_newDno
+    WHERE e_no = p_eno;
+    COMMIT;
+  END;
+
+END PKG_EMP;
+/
+
+
+
+

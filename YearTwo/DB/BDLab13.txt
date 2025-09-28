@@ -1,0 +1,66 @@
+--1
+
+CREATE OR REPLACE TRIGGER trg_restrict_emp_changes
+BEFORE UPDATE OF e_name, salary ON EMP
+FOR EACH ROW
+DECLARE
+  v_day VARCHAR2(20);
+  v_hour NUMBER;
+  v_minute NUMBER;
+
+BEGIN
+
+  SELECT TO_CHAR(SYSDATE, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH'), 
+         TO_NUMBER(TO_CHAR(SYSDATE, 'HH24')),
+         TO_NUMBER(TO_CHAR(SYSDATE, 'MI'))
+  INTO v_day, v_hour, v_minute
+  FROM dual;
+
+  IF v_day IN ('SAT', 'SUN') THEN
+    RAISE_APPLICATION_ERROR(-20001, 'Изменение e_name и salary запрещено в выходные дни.');
+  END IF;
+
+  IF v_hour < 8 OR v_hour >= 18 THEN
+    RAISE_APPLICATION_ERROR(-20002, 'Изменение e_name и salary запрещено в нерабочее время.');
+  END IF;
+
+  IF v_day = 'THU' AND v_hour = 12 THEN
+    RAISE_APPLICATION_ERROR(-20003, 'Изменение e_name и salary запрещено по четвергам с 12:00 до 13:00.');
+  END IF;
+END;
+/
+
+--2
+
+CREATE OR REPLACE VIEW v_emp_info AS
+SELECT
+    e.e_name AS last_name,
+    '' AS first_name,
+    d.d_name AS department_name,
+    e.salary,
+    e.date_hire
+FROM EMP e
+JOIN DEPT d ON e.d_no = d.d_no;
+
+--3 
+
+CREATE OR REPLACE TRIGGER trg_instead_of_update_v_emp_info
+INSTEAD OF UPDATE ON v_emp_info
+FOR EACH ROW
+BEGIN
+
+  UPDATE EMP
+  SET 
+    salary = :NEW.salary,
+    date_hire = :NEW.date_hire
+  WHERE e_name = :OLD.last_name;
+
+  UPDATE EMP
+  SET d_no = (
+    SELECT d_no
+    FROM DEPT
+    WHERE d_name = :NEW.department_name
+  )
+  WHERE e_name = :OLD.last_name;
+END;
+/
