@@ -1,0 +1,176 @@
+body
+{
+    background-color: #222831;
+}
+
+header
+{
+    min-height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center;
+}
+
+.themeButton
+{
+    border-radius: 15px;
+    border: 1px;
+    box-shadow: 0px 5px 5px 0px grey;
+
+    width: 200px;
+    height: 100px;
+
+    margin: 15px;
+
+    background-color: white;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+nav
+{
+    /*background-image: linear-gradient(to right, #00224D , #FF204E);*/
+    top: 15%;
+    padding: 0;
+    position: absolute;
+}
+
+.sidebar{
+    /*background-image: linear-gradient(to bottom left, rgb(148,187,233,40%) ,rgb(238,174,202,40%)) ;*/
+    background: #31363F;
+    padding: 20px;
+    /* border-bottom-left-radius: 15px;*/
+
+    border-radius: 15px;
+    left: 0px;
+
+    border-top-left-radius: 0px;
+    width: 14%;
+}
+
+
+
+.rowDiv{
+    display: flex;
+}
+
+header{
+    background-color: #31363F;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+main
+{
+    /* margin-top: 8.5%;
+     margin-left: 20%;
+     bottom: 20%;
+
+     background-color: crimson;
+     min-width: 80%;
+     min-height: 700px;
+
+     float: right;
+     align-content: center;*/
+
+
+
+
+}
+
+.contentDiv{
+    background-color: crimson;
+
+    display: inline-block;
+    justify-content:center;
+
+    float: right;
+    margin-top: 8%;
+    margin-left: 20%;
+    margin-right: 4%;
+
+
+}
+
+.postFrame
+{
+    float: left;
+    min-width: 390px;
+    min-height: 250px;
+    margin: 5px;
+    background-color: #CCCCCC;
+
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+
+    padding: 10px;
+
+    border-radius: 15px;
+
+}
+
+.postFrame > img
+{
+
+    border-radius: 5px;
+    min-width: 240px;
+    min-height: 135px;
+
+    background-color: black;
+
+}
+
+
+.commentDiv
+{
+
+}
+
+.chatDiv
+{
+    background: white;
+
+    left: 10px;
+    right: 10px;
+    height: 5%;
+
+    border-radius: 15px;
+    margin-top: 15px;
+
+    align-content: center;
+}
+
+.chatDiv:hover
+{
+    background-color: #CCCCCC;
+}
+
+.chatDiv > img
+{
+    left: 10%;
+}
+
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}

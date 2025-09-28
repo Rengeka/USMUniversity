@@ -1,0 +1,147 @@
+body{
+    background-color:crimson;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    color: #FFFFFF;
+    height: 6rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0; 
+    left: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    z-index: 1;
+}
+
+header > div{
+    position: relative;
+    text-align: center;
+}
+
+header > div > div{
+    display: flex; 
+    flex-wrap: wrap;
+    top: 2rem; 
+    margin-left: 3rem;
+    width: 1000px; 
+    text-align: center;
+    
+}
+
+header > div > div > div{
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+header > div > div > div > h1{
+    margin-left: 2rem;
+}
+
+header > div > div > div > h1:hover{
+    color: black;  
+}
+
+header > div > div > div > a{
+    color: white;
+    text-decoration: none;
+ }
+
+header > div > div > div > a:hover{
+   color: rgb(158, 158, 158) !important;
+}
+
+header > div > div > div > a:visited{
+    color: white;
+}
+
+header > div > div > div > a:active{
+    color: rgb(109, 109, 109) !important;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 1920px;
+    height: auto;
+    width: 100%;
+}
+
+img{
+    height: auto;
+    width: 100%;
+    max-width: 700px;
+}
+
+.filmBlock{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10rem;
+    background-color:  #1e1e1e;
+    color: whitesmoke;
+    padding: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 2vw;
+    width: 80%;
+}
+
+.rightAlignedP{
+    margin-left: 7%;
+    width: 40%;
+    height: auto;
+    word-wrap:normal;
+}
+
+.leftAlignedP{
+    width: 40%;
+    height: auto;
+    word-wrap:normal;
+}
+
+.leftAlignedP ~ img{
+    margin-left: 7%;
+}
+
+@media screen and (max-width: 1000px) {
+    .rightAlignedP{
+        margin-left: 0;
+        margin-top: 5%;
+        width: 100%;
+    }
+
+    .leftAlignedP{
+        width: 100%;
+    }
+
+    .leftAlignedP ~ img{
+        margin-left: 0;
+        margin-top: 5%;
+    }
+}
+
+footer{
+    background-color: black; 
+    height: 5rem;
+}
+
+
+@media screen and (max-width: 1050px) {
+
+    footer{
+        font-size: 75%;
+        height: 6rem;
+    }
+}
+   

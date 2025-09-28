@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../CSS/style.css" />
+    </head>
+    <body>
+
+        <br>
+        <h1>Задание 1</h1>
+        <br>
+
+        <div class="block block1">
+        </div>
+
+        <div class="block block2">
+        </div>
+
+        <div class="block block3">
+        </div>
+
+        <div class="block block4">
+        </div>  
+    
+        <div class="block block5">
+        </div>
+
+        <br>
+        <h1>Задание 2</h1>
+        <br>
+
+        <table " border="1" cellspacing="0">
+            <tr>
+                <td>
+                    <table class="padding" >
+                        <form>         
+                             <tr>
+                                 <td rowspan="2">
+                                     <fieldset>
+                                     <legend class="legend">Date personale:</legend>
+         
+                                     <table class="table">
+                                       <tr>
+                                             <td><label class="coloredLabel" for="nume">*Nume </label></td>
+                                             <td><input class="round" type="text" id="nume" name="nume" required pattern="[A-Za-z]+"></td>
+                                         </tr>
+                                         <tr>
+                                             <td><label for="prenume">*Prenume </label></td>
+                                             <td><input class="round" type="text" id="prenume" name="prenume" required pattern="[A-Za-z]+"></td>
+                                         </tr>
+                                         <tr>
+                                             <td><label for="E-mail">E-mail</label></td>
+                                             <td><input class="round" type="text" id="E-mail" name="E-mail"></td>
+                                         </tr>
+                                         <tr>
+                                             <td><label for="*Data nasterii:">*Data nasterii:</label></td>
+                                             <td><input type="date" id="*Data nasterii:" name="*Data nasterii:" required pattern="[A-Za-z]+" ></td>
+                                         </tr>
+                                         <tr>
+                                             <td><label for="*Sexul::">Sexul:</label></td>
+                                             <td><input type="radio" name="gender" value="masculin" checked> F
+                                             <input type="radio" name="gender" value="femenin"> M 
+                                         </tr>
+                                         <tr>
+                                             <td><label id="tel" for="*Telefonul:">Telefonul:</label></td>
+                                             <td><input type="text" name="Telefon" maxlength="9">
+                                        </tr>
+                                         <tr>
+                                             <td>
+                                                 <label for="*Raionul">Raionull:</label>
+                                             </td>
+                                             <td>
+                                                 <select name="orasul">
+                                                    <option value="Chisinau">Chisinau</option>
+                                                    <option value="Edinet" selected>Edinit</option>
+                                                    <option value="Cantemir">Cantemir</option>
+                                                    <option value="Ungheni">Ungheni</option>
+                                                 </select>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                 <label for="*Studii:">Studii:</label>
+                                             </td>
+                                            <td>
+                                                 <input type="checkbox" name="vehicle1" value="studii">Colegiu<br>
+                                                 <input type="checkbox" name="vehicle2" value="studii">Licenta<br>
+                                                 <input type="checkbox" name="vehicle2" value="studii">Masterat
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                 <label for="Suplimentar:">Suplimentar:</label>
+                                             </td>
+                                             <td> 
+                                                 <textarea name="message" rows="3" cols="20" maxlength="1000">Scrie aici</textarea>
+                                             </td>
+                                         </tr>
+                                     </table>
+                                 </td>
+                                 <td>
+                                     <fieldset>
+                                     <legend class="legend">Date despre produs ales:</legend>
+         
+                                     <table>
+                                       <tr>
+                                             <td><label for="produs"> *denumire<br> produs: </label></td>
+                                             <td><input type="text" name="produs" required pattern="[A-Za-z]+"></td>
+                                         </tr>
+                                         <tr>
+                                              <td><label for="*Producatorul: ">*Producatorul: </label></td>
+                                              <td><input type="text" name="Producatorul" required pattern="[A-Za-z]+"></td>
+                                         </tr>
+                                         <tr>
+                                             <td><label for="*Cantitatea de produse:">*Cantitatea de <br>produse:</label></td>
+                                             <td><input type="text" id="denumirea_produs" name="denumirea_produs" required></td>
+                                         </tr>
+         
+                                         <tr>
+                                             <td><label for=" Color: "> Color: </label></td>
+                                             <td><input type="color" name="favcolor" value="#000000"></td>
+                                         </tr>
+                                         <tr>
+                                             <td><label for=" Marimea:   "> Marimea:   </label></td>
+                                             <td><input type="text" name="Marimea:"></td>
+                                         </tr>             
+                                     </table> 
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td>
+                                     <fieldset>
+                                     <legend  class="legend">Date bancare:</legend>
+                                     <table>
+                                         <tr>
+                                             <td>
+                                                 <label for="Tipul cardului">*Tipul cardului</label>
+                                                 </td>
+                                             <td>
+                                                 <input type="radio" name="gender"  value="masculin" checked> Visa
+                                                 <input type="radio" name="gender" value="femenin"> MasterCard
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                 <label for=" card   "> *Numarul<br>cardului:  </label>
+                                             </td>
+                                            <td>
+                                                 <input type="text" name="card:" maxlength="12">
+                                             </td>
+                                         
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                 <label for="Expira:">*Expira:</label>
+                                             </td>
+                                             <td>
+                                                 <input type="month" name="bdaymonth">
+                                             </td>       
+                                         </tr>
+                                     </table>
+                                 </td>
+                             </tr>
+                             <tr>
+                                <td>
+                                    <input class="roman" type="reset" value="Anuleaza">
+                                    <input class="roman" type="submit" value="Trimite">  
+                                </td>
+                            </tr>
+                         </form>
+                     </table>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <h1>Задание 3</h1>
+        <br>
+
+        <div>
+    
+            <ol>
+                <li>One</li>
+                <li>Two</li>
+                <li>Three</li>
+                <li>Four</li>
+                <li>Five</li>
+            </ol>
+    
+            <ul>
+                <li>Six</li>
+                <li>Seven</li>
+                <li>Eight</li>
+                <li>Nine</li>
+                <li>Ten</li>
+            </ul>
+    
+            <div>
+                <p class="ppp">PPP</p>
+                <p class="ppp">One more PPP</p>
+            </div>
+    
+            <div>
+                <p class="anotherppp">another ppp</p>
+                <p class="anotherppp">one more another ppp</p>
+            </div>
+        </div>
+
+        <br>
+        <h1>Задание 4</h1>
+        <a href="https://www.youtube.com/">youtube</a>
+    </body>
+</html>

@@ -1,0 +1,129 @@
+.block{
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.block1{
+    background-color: red;
+}
+
+.block2{
+    background-repeat: repeat;
+    background-image: url("../Images/Heart.png");
+    background-size: 10px;
+}
+
+.block3{
+    background-repeat: repeat-x;
+    background-image: url("../Images/Heart.png");
+    background-size: 10px;
+    background-color: magenta;
+}
+
+.block4{
+    background-repeat: repeat-y;
+    background-image: url("../Images/Heart.png");
+    background-size: 10px;
+    background-color: greenyellow;
+}
+
+.block5{
+    background-image: url("../Images/Heart.png");
+    background-size: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color:aqua; 
+}
+
+.legend{
+    font-weight: bold;
+}
+
+.padding{
+    padding-top: 15;
+    padding-left: 10;
+    padding-right: 10; 
+    padding-bottom: 5;
+}
+
+.round{
+    border-radius: 10px;
+}
+
+.roman{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: lightblue;
+}
+
+label[for="prenume"]{
+    background-color: blueviolet;
+}
+
+.coloredLabel{
+    color:aqua;
+}
+
+.coloredLabel + .round{
+   box-sizing: border-box;
+}
+
+input ~ input{
+    width: 50%;
+}
+
+select > option{
+    background-color: coral;
+}
+
+#tel {
+    background-color:cornflowerblue;
+}
+
+input:focus {
+   background-color: aquamarine;
+   color: blue;
+}
+
+a:active {
+    background-color: red;
+}
+
+a:visited {
+    color:lime;
+}
+
+a:hover {
+    background-color: rgb(255, 140, 0);
+}
+
+a:link {
+    color:crimson;
+}
+
+.ppp:first-child {
+    color: goldenrod;
+}
+
+.anotherppp:last-child {
+    color: rgb(218, 32, 162);
+}
+
+ol>li:before {
+    content: "BEFORE";
+    color: brown;
+}
+
+ul>li:after {
+    content: "AFTER";
+    color: magenta;
+}
+
+p::first-letter{
+    font-weight: bold;
+    color: brown;
+}
+
+  

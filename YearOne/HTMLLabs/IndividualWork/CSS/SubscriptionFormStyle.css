@@ -1,0 +1,173 @@
+body{
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: aliceblue;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    background-color: rgb(104, 104, 104);
+    color: #FFFFFF;
+    height: 6rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0; 
+    left: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    z-index: 1;
+}
+
+header > div{
+    position: relative;
+    text-align: center;
+}
+
+header > div > div{
+    display: flex; 
+    flex-wrap: wrap;
+    top: 2rem; 
+    margin-left: 3rem; 
+    width: 1000px; 
+    text-align: center;
+}
+
+header > div > div > div{
+    color: white;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+header > div > div > div > a{
+    color: white;
+    text-decoration: none;
+ }
+
+header > div > div > div > a:hover{
+   color: rgb(39, 39, 39) !important;
+}
+
+header > div > div > div > a:visited{
+    color: white;
+}
+
+header > div > div > div > a:active{
+    color: rgb(0, 0, 0) !important;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    float: left;
+    max-width: 40%;
+    width: 100%;
+}
+
+h1{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2rem;
+}
+
+form{
+    margin-left: 30%;
+}
+
+
+form > div{
+    border-width: 6px;
+    border-style: solid;
+    height: 20rem;
+    padding: 10px;
+    width: 100%;
+    max-width: 40vw;
+    border-radius: 15px;
+    border-color: rgb(193, 193, 193);
+    box-shadow: 10px 10px 0px black;
+}
+
+form > div > div > input{
+    border-width: 6px;
+    border-style: solid;
+    border-radius: 15px;
+    box-shadow: 5px 5px 0px black;
+    margin-bottom: 1rem;
+}
+
+footer{
+    background-color: rgb(104, 104, 104); 
+    height: auto;
+    max-width: 1920px;
+    width: 100%;
+}
+
+input[type]{
+    margin-top: 1rem;
+    width: 6rem;
+    height: 2rem;
+    background-color: aliceblue;
+    box-shadow: 5px 5px 0px black;
+    border-radius: 15px;
+}
+
+button{
+    margin-top: 1rem;
+    width: 6rem;
+    height: 2rem;
+    background-color: aliceblue;
+    box-shadow: 5px 5px 0px black;
+    border-radius: 15px;
+}
+
+button:hover{
+    background-color:rgb(193, 193, 193);
+}
+
+button:active{
+    box-shadow: 2px 2px 0px black;
+}
+
+input[type]:hover{
+    background-color:rgb(193, 193, 193);
+}
+
+input[type]:active{
+    box-shadow: 2px 2px 0px black;
+}
+
+
+@media screen and (max-width: 1050px) {
+
+   .column{
+    float: none;
+   }
+
+   form{
+    display: flex;
+    flex-direction: column;
+   }
+
+   form > div{
+    height: 50rem;
+   }
+
+   form > div > div{
+    margin-left: 10%;
+   }
+
+   input[type]{
+    margin-left: 23%;
+   }
+
+   button{
+    margin-left: 23%;
+   }
+   
+
+}

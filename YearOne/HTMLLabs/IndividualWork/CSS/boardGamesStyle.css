@@ -1,0 +1,129 @@
+body{
+    background-color:#C4C4CF;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    background-color:#26263B;
+    color: #FFFFFF;
+    height: 6rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0; 
+    left: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    z-index: 1;
+}
+
+header > div{
+    position: relative;
+    text-align: center;
+}
+
+header > div > div{
+    display: flex; 
+    flex-wrap: wrap;
+    top: 2rem; 
+    margin-left: 3rem;
+    width: 1000px; 
+    text-align: center;
+    
+}
+
+header > div > div > div{
+    color: white;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+header > div > div > div > h1{
+    margin-left: 2rem;
+}
+
+header > div > div > div > h1:hover{
+    color: black;  
+}
+
+header > div > div > div > a{
+    color: white;
+    text-decoration: none;
+ }
+
+header > div > div > div > a:hover{
+   color: rgb(158, 158, 158) !important;
+}
+
+header > div > div > div > a:visited{
+    color: white;
+}
+
+header > div > div > div > a:active{
+    color: rgb(109, 109, 109) !important;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 1920px;
+    height: auto;
+    width: 100%;
+}
+
+main > div{
+    margin-top: 10rem;
+    background-color:  #1e1e1e;
+    padding: 5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    border-radius: 10px;
+}
+
+main > div > div{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5.5%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+main > div > div > img{
+   max-width: 400px;
+   width: 100%;
+   height: auto;
+
+}
+
+main > div > div > p{
+    color: whitesmoke;
+    font-size: 1.5rem;
+    text-wrap: wrap;
+    margin-left: 5rem;
+    width: 60%;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color: grey;
+}
+
+a:active{
+    color: rgb(74, 74, 74);
+}
+
+footer{
+    margin-top: 10rem;
+    background-color: #26263B; 
+    height: 5rem;
+}
+ 

@@ -1,0 +1,17 @@
+#transaction-table {
+    border-collapse: collapse;
+    border: 1px solid black; /* Черная рамка для всей таблицы */
+}
+
+#transaction-table th, #transaction-table td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+#transaction-form{
+    margin: 10px;
+}
+
+#transaction-data{
+    min-height: 30px;
+}

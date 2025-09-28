@@ -1,0 +1,147 @@
+<!DOCTYPE 
+html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="Individual Work Games Page"/>
+        <meta name="keywords" content="USM, Individual, Work, HTML, CSS, Games"/>
+
+        <meta name="author" content="Ciobanu Stanislav"/>
+        <link rel="shortcut icon" href="../Images/sports_esports_FILL0_wght400_GRAD0_opsz24.png">
+        <link rel="stylesheet" href="../CSS/videoGamesStyle.css" />
+        <title>IndividualWorkGamesPage</title>
+    </head>
+
+    <body class="change-bg-on-scroll">
+
+        <header class="change-bg-on-scroll">
+            <div>
+                <div>
+                    <div>
+                        <a href="../HTML/MainPage.html"><h1>Main Page</h1></a>
+                    </div>
+                    <div>
+                        <a href="../HTML/SubscriptionPage.html"><h1>Subscribe</h1></a>
+                    </div>  
+                </div>    
+            </div>   
+        </header>
+
+        <!-- <nav class="change-bg-on-scroll">
+            <div>
+                <h1>Death Stranding</h1>
+            </div>
+            <div>
+                <h1>Red Dead Redemption 2</h1>
+            </div>
+            <div>
+                <h1>Star wars Jedi</h1>
+            </div>
+        </nav>-->
+
+        <main>
+            <div style="margin-top: 10rem; font-size: 25px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+             background-color: #1e1e1e;">
+                <h1 style="color: aliceblue;">My Favourite games!</h1>
+            </div>
+            <div style="margin-top: 7rem;">
+                <img style="max-width: 1280px; width: 100%; height: auto;" src="../Images/Death-Stranding-Logo.png">
+                <div class="gameBlock" align="center">
+                    <video  width="854" height="480" autoplay muted loop>
+                    <source src="../Videos/Death Stranding - TGA 2017_ 4K Teaser Trailer _ PS4.mp4" type="video/mp4"> 
+                    </video>   
+                    <pre style="margin-left: 5rem;">
+                        <h1>
+Death stranding is an
+unique game that has 
+no analogues.
+Being created by 
+Hideo Konjima it became
+one of the most
+intresting gaming
+experiences
+                        </h1>
+                    </pre>
+                </div> 
+            </div>
+
+            <div>
+                <img style="margin-bottom: 5rem;" width="1537px" height="520px" src="../Images/pngimg.com - red_dead_redemption_PNG27.png">
+                <div class="gameBlock" align="center">
+                    <video width="854" height="480" autoplay muted loop>
+                        <source src="../Videos/RDR2.mp4" type="video/mp4">
+                    </video>
+                    <pre style="margin-left: 5rem;">
+                        <h1>
+Red dead redemption 2
+is a game, developed by
+Rock Star Games. It tells
+The story of Arthur
+Morgan. A cowboy and 
+criminal, that gets his 
+redemption. The story is 
+brilliant and tragic.
+                        </h1>
+                    </pre>
+                </div>
+            </div>
+        
+            <div style="margin-top: 0rem; margin-bottom: 5rem;">
+                <img width="1280px" height="720px" src="../Images/Jedi_Fallen_Order_logo.png">
+                <div class="gameBlock" style="margin-top: 0rem;" align="center" >
+                    <video  width="854" height="480" autoplay muted loop>
+                    <source src="../Videos/Star Wars Jedi_ Fallen Order — Official Reveal Trailer.mp4" type="video/mp4">   
+                    </video>    
+                    <pre style="margin-left: 5rem;">
+                        <h1>
+Star Wars jedi : Fallen Order
+is a new series of SW game 
+by Respawn Entratainment.
+A souls like game in the 
+setting of the galaxy far 
+away is the only souls like 
+that is plesurable for me.
+                        </h1>
+                    </pre>
+                </div> 
+            </div>
+                
+
+        
+        </main>
+
+        <footer>
+            <h1 style="color: #ffffff; padding: 20px;" align="center">
+                Phone number : +37378729217 , Email : stasciobanuwork@gmail.com
+            </h1>
+        </footer>
+    </body>
+
+    <script>
+        // Get all elements with the class
+        var elements = document.querySelectorAll('.change-bg-on-scroll');
+      
+        // Listen for the scroll event
+        window.addEventListener('scroll', function() {
+          // Iterate through each element
+          elements.forEach(function(element) {
+            // Check if the scroll position is greater than a certain value
+            if (window.scrollY > 1200 && window.scrollY <= 3000) {
+              // Add a class to the element when scrolled
+              element.classList.add('scrolled1');
+              element.classList.remove('scrolled2');
+            } 
+            else if (window.scrollY > 3000) {
+              // Remove the class when not scrolled
+              element.classList.remove('scrolled1');
+              element.classList.add('scrolled2');
+            } 
+            else {
+              element.classList.remove('scrolled1');
+              element.classList.remove('scrolled2');
+            }
+            
+          });
+        });
+    </script>
+
+</html>

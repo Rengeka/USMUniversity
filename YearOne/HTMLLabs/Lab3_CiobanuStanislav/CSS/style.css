@@ -1,0 +1,39 @@
+ul {
+    color: blueviolet;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    list-style-type: square;
+}
+
+ol {
+    color: royalblue;
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: blanchedalmond;
+}
+
+td{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    border: 1px solid;
+    background-color: rgb(197, 193, 208);
+}
+
+th{
+    width: 100px;
+    color: white;
+    background-color: rgb(14, 6, 36);
+    border: 1px solid;
+}
+
+tr{
+    border: 1px solid;
+    height: 60px;
+}
+
+table{
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+}

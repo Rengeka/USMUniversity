@@ -1,0 +1,285 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color: black;
+}
+
+body::before{
+    /*background-image: url("images/1926.jpg");*/
+    opacity: 40%;
+    filter: blur(30px);
+    content: '';
+    position: fixed;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    z-index: -1;
+    background: linear-gradient(#e66465, #9198e5);
+}
+
+header {
+    background-color: #222326;
+    align-items: center;
+    align-content: center;
+    padding: 10px;
+
+    justify-content: center;
+    justify-items: center;
+    font-family: Roboto;
+}
+
+header > div > input[type=text] {
+
+    padding: 6px;
+    border: none;
+    margin-top: 16px;
+    margin-right: 16px;
+    font-size: 17px;
+    width: 1000px;
+    border-radius: 15px;
+}
+
+
+footer {
+    min-height: 100px;
+    background-color: #222326;
+    margin-top: 100px;
+}
+
+
+#searchDiv {
+    float: right;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+}
+
+#searchDiv > img:hover{
+    opacity: 60%;
+    cursor: pointer;
+}
+
+
+
+header > a {
+    opacity: 45%;
+}
+
+header > a:hover {
+    opacity: 70%;
+    cursor: pointer;
+}
+
+header > a:active{
+    opacity: 100%;
+}
+
+/* Menu */
+.dropbtn {
+    background-color: #222326;
+    color: #8B8B8C;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.dropbtn > img {
+    max-height: 36px;
+    max-width: 36px;
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown-content a:active {
+    background-color: #CCCCCC;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #F2F2F2;
+    color: #222326;
+}
+
+#headDiv{
+    display: flex;
+    font-family: Roboto;
+    font-size: 20px;
+    color: whitesmoke;
+    justify-content: space-between;
+
+    width: 80%;
+}
+
+#ratingDiv{
+    display: inline-block;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+}
+
+#ratingDiv > div{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 10%;
+}
+
+#ratingDiv > div > img{
+    max-width: 30px;
+    margin-right: 10px;
+}
+
+#div1 {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#div2 {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 10px;
+}
+
+#div2 > img {
+    max-height: 450px;
+    border-radius: 20px;
+}
+
+#div2 > video {
+    max-height: 450px;
+    margin-left: 5px;
+    border-radius: 20px;
+}
+
+
+/*#div2 > div {
+    background-color: #222326;
+    max-height: 450px;
+    font-size: 20px;
+    border-radius: 20px;
+    font-family: Roboto;
+    padding: 10px;
+    margin-left: 5px;
+    color: whitesmoke;
+}*/
+
+#div2 > div {
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-left: 5px;
+    background-color: #222326;
+    height: 450px;
+    width: 240px;
+    justify-items: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 70%;
+
+}
+
+#div2 > div:hover{
+    opacity: 50%;
+}
+
+#div3{
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 5px;
+}
+
+#div3 > div{
+    background-color: #222326;
+    border-radius: 20px;
+    width: calc(80% - 10px);
+    height: 850px;
+    padding: 10px;
+
+
+}
+
+#div3 > div > div{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+#div3 > div > div > div{
+    margin-left: 30px;
+    font-family: Roboto;
+    font-size: 30px;
+    color: whitesmoke;
+}
+
+/*#div3 > div > div{
+    background-color: whitesmoke;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+    max-width: 500px;
+}*/
+
+.round {
+    border-radius: 200px;
+    height: 200px;
+    width: 200px;
+}

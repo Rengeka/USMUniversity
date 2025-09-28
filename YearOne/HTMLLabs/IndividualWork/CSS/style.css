@@ -1,0 +1,335 @@
+body {
+    background-color: #C4EEF2;
+    margin: 0;
+    padding: 0; 
+}
+
+header {
+    position: fixed;
+    background-color: #025159;
+    color: #FFFFFF;
+    height: 6rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0; 
+    left: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    z-index: 1;
+}
+
+header > div{
+    position: relative;
+    text-align: center;
+}
+
+header > div > div{
+    /*position: absolute;*/
+    display: flex; 
+    flex-wrap: wrap;
+    top: 2rem; 
+    margin-left: 3rem; 
+    width: 1000px; 
+    text-align: center;
+}
+
+header > div > div > div{
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+/*header > div > div > div > h1{
+    margin-left: 2rem;
+}
+
+header > div > div > div > h1:hover{
+    color: black;  
+}*/
+
+header > div > div > div > a{
+    color: white;
+    text-decoration: none;
+}
+
+header > div > div > div > a:hover{
+   color: rgb(39, 39, 39) !important;
+}
+
+header > div > div > div > a:visited{
+    color: white;
+}
+
+header > div > div > div > a:active{
+    color: rgb(0, 0, 0) !important;
+}
+
+#MainImage{
+    width: 100%;
+    height: auto;
+    max-width: 1920px;
+}
+
+main{
+    margin-top: 5rem;
+}
+
+#MainDiv:first-child{
+    background-color: black; 
+    position: inherit;
+}
+
+#IconsDiv{
+    /*position: absolute; 
+    top: 33rem; 
+    right: 5rem; */
+    position:absolute;
+    right: 2rem;
+    margin-top: 0.5rem;
+    
+    display: inline;
+}
+
+#IconsDiv > div{
+    display: inline-block;
+    margin-left: 1rem;
+    opacity: 0.5;
+}
+
+#IconsDiv > div:hover{
+    animation-name: OpacityAnim;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+#IconsDiv > div:active{
+    opacity: 1 !important;
+}
+
+#IconsDiv > div > button{
+    height: 7rem;
+    width: 7rem;
+
+    background-color: #64646400;
+    border-radius: 50%;
+    border:0;
+
+   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);*/
+
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+#IconsDiv > div > button > img{
+    height: 100%; 
+    width: 100%;
+}
+
+#HobbiesDiv{
+    display: inline;
+    justify-content:center;
+}
+
+#HobbiesDiv > div{
+    margin-top: 7rem; 
+    margin-bottom: 10rem;
+}
+
+#HobbiesDiv > div > div{
+    /*background-color: #D9D9D9; */
+
+    display: inline-block; 
+
+    margin-right: 5rem;
+    margin-bottom: 7rem;
+}
+
+#HobbiesDiv > div :last-child{
+    margin-right: 0rem;
+}
+
+#HobbiesDiv > div > div:hover{
+    animation-name: SkewAnim;
+    animation-duration: 0.2s;
+    animation-iteration-count: infinite;
+}
+
+#HobbiesDiv > div > div > h1{
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100%;
+}
+
+#HobbiesDiv > div > div > a > img{
+    border-color: gray;
+    box-shadow: 25px -16px rgb(36, 36, 36);
+    width: 100%;
+    height: auto;
+}
+
+@keyframes SkewAnim{
+    0% {transform: skewX(0deg);}
+    25% {transform: skewX(2deg);}
+    50% {transform: skewX(0deg);}
+    75% {transform: skewX(-2deg);}
+    100% {transform: skewX(0deg);}
+}
+
+@keyframes OpacityAnim{
+   from {opacity: 0.5;}
+   to {opacity: 0.8;}
+}
+
+/* Доделать позже
+nav > div{
+    position: fixed;
+    left: -20rem;  
+    top: 7rem;  
+    z-index: 1; 
+
+    width: 15rem; 
+    height: 20rem; 
+
+    border-top-right-radius : 25px; 
+    border-bottom-right-radius : 25px; 
+    padding: 1rem; 
+    
+}
+
+nav > div:hover{
+    animation-name: MenuAnimation;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes MenuAnimation{
+    from {left: -20rem;}
+    to {left: 0rem;} 
+}*/
+
+.change-bg-on-scroll {
+    background-color: #025159;
+    transition: background-color 0.5s ease;
+}
+
+.scrolled {
+    background-color:#F28705;
+}
+
+body.change-bg-on-scroll{
+    background-color: #C4EEF2;
+    transition: background-color 0.5s ease;
+}
+
+body.scrolled {
+    background-color:#4C4C4C;
+}
+
+footer{
+    background-color: #F28705; 
+    height: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+
+    /*header > div > div:first-child{
+        margin-left: 0rem;
+    }*/
+
+    #IconsDiv {
+        right: 5%;
+        left: 8%;
+    }
+
+    #HobbiesDiv > div > div{
+        margin-right: 0rem;
+    }
+ 
+}
+
+@media screen and (max-width: 1050px) {
+
+    footer{
+        font-size: 75%;
+        height: 6rem;
+    }
+
+}
+
+
+/*
+
+.Text{
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.block{
+    background-color: #D9D9D9; 
+    display: inline-block; 
+    margin-left: 2rem;
+    margin: 1rem;
+    margin-bottom: 7rem;
+}
+
+.block:hover{
+    animation-name: SkewAnim;
+    animation-duration: 0.2s;
+    animation-iteration-count: infinite;
+}
+
+nav{
+    position: fixed;
+    height: 50%;
+    width: 20%;
+    margin-top: 8rem;
+}
+aside{
+    position: fixed;
+    height: 100%;
+    width: 20%;
+    right: 0;
+    margin-top: 8rem;
+}
+section.mainSection{
+    display: flex;
+}
+
+section.contentSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.circle {
+    height: 7rem;
+    width: 7rem;
+    background-color: #64646400;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border:0;
+    cursor: pointer;
+}
+ */
+
+
+/*.change-on-scroll 
+{
+        opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.scrolled 
+{
+    opacity: 1;
+}
+
+@keyframes fadeAnimation{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}*/
+
+
