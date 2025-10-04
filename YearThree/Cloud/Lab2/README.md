@@ -2,7 +2,7 @@
 
 ### This lab requires either Ubuntu or Ubuntu wsl distro
 
-### How to start
+### How to start (Bash)
 
 0. [Optionaly] run ubuntu-setup.sh for downloading all the required tools
 
@@ -13,3 +13,11 @@ Do not forget to enable docker desktop WSL integration with Ubuntu if using Wind
 2. Add your ids to variables.json your ids
 
 3. run init.sh
+
+### How to start (Terraform)
+
+0. Use ```ssh-keygen -t rsa -b 4096 >> terraform/vm/keys/ec2-key.pub``` to create a key pair
+
+1. Run terraform init in terraform folder
+
+2. Run terraform apply

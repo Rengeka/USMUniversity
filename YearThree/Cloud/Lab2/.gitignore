@@ -2,3 +2,4 @@ variables.json
 *.zip
 aws/*
 *.pem
+*.pub

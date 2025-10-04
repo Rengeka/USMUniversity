@@ -16,9 +16,9 @@ echo "Creating Key Pair..."
 aws ec2 create-key-pair \
   --key-name ec2-key-pair \
   --query 'KeyMaterial' \
-  --output text > ec2-key.pem
+  --output text > ~/ec2-key.pem
 
-chmod 400 ec2-key.pem
+chmod 400 ~/ec2-key.pem
 
 echo "Creating Security Group..."
 GROUP_ID=$(aws ec2 create-security-group \
@@ -41,19 +41,9 @@ echo "CIDR : 0.0.0.0/0"
 echo "Protocols : tcp"
 echo "Ports : all"
 
-echo "Cloning php app"
-git clone https://github.com/Rengeka/USMUniversity/tree/main/YearTwo/PHP/Lab5
-
-echo "Building php app"
-docker image build -f dockerfile.php .
-
-echo "Pushing php app image on docker hub"
-docker login
-docker push rengeka/php-test-app:latest
-
 echo "Creating EC2 instance"
 INSTANCE_ID=$(aws ec2 run-instances \
-  --image-id ami-04c08fd8aa14af291 \
+  --image-id ami-01f38db8b018d21de \
   --count 1 \
   --instance-type t3.micro \
   --key-name ec2-key-pair \
@@ -71,19 +61,36 @@ PUBLIC_IP=$(aws ec2 describe-instances \
   --output text)
 
 echo "Setting EC2 up"
-scp -i ec2-key.pem docker-compose.yml ec2-user@$PUBLIC_IP:~/docker-compose.yml
-ssh -i ec2-key.pem -o StrictHostKeyChecking=no ec2-user@$PUBLIC_IP <<'EOF'
+scp -i ~/ec2-key.pem docker-compose.yml ec2-user@$PUBLIC_IP:~/docker-compose.yml
+ssh -i ~/ec2-key.pem -o StrictHostKeyChecking=no ec2-user@$PUBLIC_IP <<'EOF'
 sudo yum update -y
-sudo yum install -y docker docker-compose
+sudo yum install -y docker
+sudo systemctl enable docker
 sudo systemctl start docker
 
-cd ~
-sudo docker-compose up -d
+sudo docker network create main-network
 
-echo "Sleeping 30 seconds.."
-sleep 30
+sudo docker run -d \
+  --name sql \
+  --network main-network \
+  -e MYSQL_ROOT_PASSWORD=rootpassword \
+  -e MYSQL_DATABASE=mydatabase \
+  --restart always \
+  mysql:latest
 
-sudo docker ps
+sleep 20
+
+sudop docker run -d \
+  --name php \
+  --network main-network \
+  -p 80:80 \
+  -e DB_HOST=sql \
+  -e DB_NAME=mydatabase \
+  -e DB_USER=root \
+  -e DB_PASS=rootpassword \
+  --restart always \
+  rengeka/php-test-app:latest
+
 EOF
 
 echo "Waiting for PHP container to start..."
