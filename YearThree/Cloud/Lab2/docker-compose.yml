@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  sql:
+    image: mysql:latest
+    container_name: sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+    networks:
+      - main-network
+
+  php:
+    image: rengeka/php-test-app:latest
+    container_name: php
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      DB_HOST: sql
+      DB_NAME: mydatabase
+      DB_USER: root
+      DB_PASS: rootpassword
+    depends_on:
+      - sql
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    driver: bridge
