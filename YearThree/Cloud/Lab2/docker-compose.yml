@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
+      MYSQL_DATABASE: post_db
     networks:
       - main-network
 
@@ -19,7 +19,7 @@ services:
       - "80:80"
     environment:
       DB_HOST: sql
-      DB_NAME: mydatabase
+      DB_NAME: post_db
       DB_USER: root
       DB_PASS: rootpassword
     depends_on:

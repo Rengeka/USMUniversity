@@ -65,6 +65,8 @@ scp -i ~/ec2-key.pem docker-compose.yml ec2-user@$PUBLIC_IP:~/docker-compose.yml
 ssh -i ~/ec2-key.pem -o StrictHostKeyChecking=no ec2-user@$PUBLIC_IP <<'EOF'
 sudo yum update -y
 sudo yum install -y docker
+sudo yum install -y python3-pip
+sudo pip3 install docker-compose
 sudo systemctl enable docker
 sudo systemctl start docker
 
@@ -74,18 +76,18 @@ sudo docker run -d \
   --name sql \
   --network main-network \
   -e MYSQL_ROOT_PASSWORD=rootpassword \
-  -e MYSQL_DATABASE=mydatabase \
+  -e MYSQL_DATABASE=post_db \
   --restart always \
   mysql:latest
 
 sleep 20
 
-sudop docker run -d \
+sudo docker run -d \
   --name php \
   --network main-network \
   -p 80:80 \
   -e DB_HOST=sql \
-  -e DB_NAME=mydatabase \
+  -e DB_NAME=post_db \
   -e DB_USER=root \
   -e DB_PASS=rootpassword \
   --restart always \
