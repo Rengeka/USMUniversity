@@ -1,8 +1,3 @@
-/*resource "aws_key_pair" "ec2_key" {
-  key_name   = "ec2-key-tf"
-  public_key = file("${path.module}/keys/ec2-key.pub")
-}*/
-
 resource "aws_security_group" "webserver_sg" {
   name        = "webserver-sg-tf"
 
@@ -31,7 +26,6 @@ resource "aws_security_group" "webserver_sg" {
 resource "aws_instance" "vm" {
   ami                    = var.ami
   instance_type          = var.instance_type
-  # key_name               = aws_key_pair.ec2_key.key_name
   vpc_security_group_ids = [aws_security_group.webserver_sg.id]
 
   user_data = <<-EOF
