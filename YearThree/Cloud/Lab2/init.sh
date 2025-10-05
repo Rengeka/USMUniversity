@@ -67,6 +67,7 @@ sudo yum update -y
 sudo yum install -y docker
 sudo yum install -y python3-pip
 sudo pip3 install docker-compose
+
 sudo systemctl enable docker
 sudo systemctl start docker
 

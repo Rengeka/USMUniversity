@@ -3,3 +3,4 @@ variables.json
 aws/*
 *.pem
 *.pub
+ec2-key

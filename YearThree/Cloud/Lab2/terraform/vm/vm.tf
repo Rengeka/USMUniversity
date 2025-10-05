@@ -1,10 +1,10 @@
-resource "aws_key_pair" "ec2_key" {
-  key_name   = "ec2-key"
+/*resource "aws_key_pair" "ec2_key" {
+  key_name   = "ec2-key-tf"
   public_key = file("${path.module}/keys/ec2-key.pub")
-}
+}*/
 
 resource "aws_security_group" "webserver_sg" {
-  name        = "webserver-sg"
+  name        = "webserver-sg-tf"
 
   ingress {
     from_port   = 22
@@ -23,7 +23,7 @@ resource "aws_security_group" "webserver_sg" {
   egress {
     from_port   = 0
     to_port     = 65535
-    protocol    = "-1"
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -31,54 +31,39 @@ resource "aws_security_group" "webserver_sg" {
 resource "aws_instance" "vm" {
   ami                    = var.ami
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.ec2_key.key_name
+  # key_name               = aws_key_pair.ec2_key.key_name
   vpc_security_group_ids = [aws_security_group.webserver_sg.id]
 
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
-    yum install -y docker.io docker-compose
+    yum install -y docker
+
+    systemctl enable docker
     systemctl start docker
 
-    cat <<EOT > /home/ubuntu/docker-compose.yml
-    version: '3.9'
+    docker network create main-network
 
-    services:
-      sql:
-        image: mysql:latest
-        container_name: sql
-        restart: always
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpassword
-          MYSQL_DATABASE: mydatabase
-        networks:
-          - main-network
+    docker run -d \
+      --name sql \
+      --network main-network \
+      -e MYSQL_ROOT_PASSWORD=rootpassword \
+      -e MYSQL_DATABASE=post_db \
+      --restart always \
+      mysql:latest
 
-      php:
-        image: rengeka/php-test-app:latest
-        container_name: php
-        restart: always
-        ports:
-          - "80:80"
-        environment:
-          DB_HOST: sql
-          DB_NAME: mydatabase
-          DB_USER: root
-          DB_PASS: rootpassword
-        depends_on:
-          - sql
-        networks:
-          - main-network
-        volumes:
-          - ./public:/var/www/html   
+    sleep 20
 
-    networks:
-      main-network:
-        driver: bridge
-    EOT
-
-    cd /home/ubuntu
-    docker-compose up -d
+    docker run -d \
+      --name php \
+      --network main-network \
+      -p 80:80 \
+      -e DB_HOST=sql \
+      -e DB_NAME=post_db \
+      -e DB_USER=root \
+      -e DB_PASS=rootpassword \
+      --restart always \
+      rengeka/php-test-app:latest
   EOF
 
   tags = {

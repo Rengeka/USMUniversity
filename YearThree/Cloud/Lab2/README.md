@@ -16,8 +16,6 @@ Do not forget to enable docker desktop WSL integration with Ubuntu if using Wind
 
 ### How to start (Terraform)
 
-0. Use ```ssh-keygen -t rsa -b 4096 >> terraform/vm/keys/ec2-key.pub``` to create a key pair
-
 1. Run terraform init in terraform folder
 
 2. Run terraform apply
