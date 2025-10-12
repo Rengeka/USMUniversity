@@ -1,5 +1,5 @@
 # Lab 1
-Topic: Implementation of a Finite Automaton
+Topic: Finite Automaton
 
 Student: Stanisalv Ciobanu
 
