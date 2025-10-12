@@ -7,6 +7,8 @@ Group: I2302
 
 Date: 12.09.2025
 
+Github: https://github.com/Rengeka/USMUniversity/tree/main/YearThree/AI
+
 Teacher: V.Trebes
 
 ### **Task (3)**

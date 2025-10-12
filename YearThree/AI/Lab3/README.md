@@ -5,6 +5,8 @@ Student: Stanisalv Ciobanu
 
 Group: I2302
 
+Github: https://github.com/Rengeka/USMUniversity/tree/main/YearThree/AI
+
 Teacher: V.Trebes
 
 # Structure
