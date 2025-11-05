@@ -187,7 +187,20 @@ end
         var: running_containers.stdout_lines
 ```
 
+Меняем права ключам 
+
+```bash
+wsl -d Ubuntu 
+
+mkdir -p ~/.vagrant_keys
+cp .vagrant/machines/vm1/virtualbox/private_key ~/.vagrant_keys/vm1_key
+cp .vagrant/machines/vm2/virtualbox/private_key ~/.vagrant_keys/vm2_key
+chmod 600 ~/.vagrant_keys/vm1_key
+chmod 600 ~/.vagrant_keys/vm2_key
+```
+
 Запускаем всё
+
 ```bash
 vagrant up
 vagrant status
@@ -202,3 +215,12 @@ ansible-playbook -i hosts.ini deploy_compose.yml
 
 ![wordpress](./images/2.png)
 
+![wordpress](./images/3.png)
+
+![wordpress](./images/4.png)
+
+![wordpress](./images/5.png)
+
+![wordpress](./images/6.png)
+
+![wordpress](./images/7.png)
