@@ -1,5 +1,3 @@
-Технически задание ещё не готово. Просто сдал чтобы уложиться в срок :D
-
 Создадим docker-compose.yml с многокнтейнерным приложением
 
 ```yml
@@ -113,3 +111,94 @@ volumes:
       debug:
         var: compose_version.stdout
 ```
+
+Запустим WSL и установим ansible
+```bash
+wsl -d Ubuntu
+sudo apt update
+sudo apt install ansible -y
+```
+
+Создадим Vagrantfile через ```vargant up```
+
+И укажем две виртуалки
+```bash
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/jammy64"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 4096 
+    vb.cpus = 2
+  end
+
+  config.vm.define "vm1" do |vm1|
+    vm1.vm.hostname = "vm1"
+    vm1.vm.network "private_network", ip: "192.168.56.10"
+  end
+
+   config.vm.define "vm2" do |vm2|
+    vm2.vm.hostname = "vm2"
+    vm2.vm.network "private_network", ip: "192.168.56.11"
+  end
+end
+```
+
+Создадим ```hosts.ini``` файл 
+```bash
+[docker_hosts]
+192.168.56.10 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vm1/virtualbox/private_key
+192.168.56.11 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/vm2/virtualbox/private_key
+```
+
+Создадим deploy_compose.yml
+```yml
+---
+- name: Deploy Docker Compose Application
+  hosts: docker_hosts
+  become: true
+  vars:
+    compose_file_src: ./docker-compose.yml
+    compose_file_dest: /home/{{ ansible_user }}/docker-compose.yml
+  tasks:
+    - name: Copy docker-compose.yml to remote host
+      copy:
+        src: "{{ compose_file_src }}"
+        dest: "{{ compose_file_dest }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0644'
+
+    - name: Launch Docker Compose application
+      shell: docker compose -f {{ compose_file_dest }} up -d
+      args:
+        chdir: "/home/{{ ansible_user }}"
+      register: compose_up
+
+    - name: Show docker compose up output
+      debug:
+        var: compose_up.stdout_lines
+
+    - name: Verify running containers
+      command: docker ps
+      register: running_containers
+
+    - name: Show running containers
+      debug:
+        var: running_containers.stdout_lines
+```
+
+Запускаем всё
+```bash
+vagrant up
+vagrant status
+
+wsl -d Ubuntu
+
+ansible -i hosts.ini docker_hosts -m ping
+ansible-playbook -i hosts.ini install_docker.yml
+
+ansible-playbook -i hosts.ini deploy_compose.yml
+```
+
+![wordpress](./images/2.png)
+

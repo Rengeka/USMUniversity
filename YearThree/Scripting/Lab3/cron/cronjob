@@ -1,0 +1,3 @@
+0 6 * * * root /usr/local/bin/python3 /app/currency_exchange_rate.py MDL EUR $(date -d "yesterday" +\%Y-\%m-\%d) >> /var/log/cron.log 2>&1
+
+0 17 * * 5 root /usr/local/bin/python3 /app/currency_exchange_rate.py MDL USD $(date -d "last friday -7 days" +\%Y-\%m-\%d)_to_$(date -d "last friday" +\%Y-\%m-\%d) >> /var/log/cron.log 2>&1

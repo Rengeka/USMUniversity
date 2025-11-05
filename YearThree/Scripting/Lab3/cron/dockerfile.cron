@@ -1,0 +1,14 @@
+FROM python:3.12-bullseye
+
+RUN apt-get update && apt-get install -y cron procps 
+
+COPY currency_exchange_rate.py /app/currency_exchange_rate.py
+COPY cronjob /etc/cron.d/currency_cron
+COPY startup.sh /app/startup.sh
+
+RUN chmod +x /app/startup.sh && \
+    chmod 666 /etc/cron.d/currency_cron
+
+WORKDIR /app
+
+CMD ["sh", "/app/startup.sh"]
