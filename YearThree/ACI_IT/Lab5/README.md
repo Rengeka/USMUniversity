@@ -221,3 +221,5 @@ git add .
 git commit -m "Addedl laravel app with CI/CD config"
 git push
 ```
+
+![gitlab](./images/8.png)
