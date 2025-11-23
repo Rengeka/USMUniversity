@@ -1,0 +1,2 @@
+"Severity","Time","Recovery time","Status","Host","Problem","Duration","Ack","Actions","Tags"
+"Average","2025-11-23 16:06:26","","PROBLEM","Zabbix server","Zabbix agent is not available (for 3m)","2h 1m 28s","No","","class: os, component: system, scope: availability, target: linux"

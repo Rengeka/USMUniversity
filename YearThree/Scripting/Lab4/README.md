@@ -2,7 +2,7 @@
 
 ## Project description
 
-a description here
+This laboratory work requires setting up jenkins and creating a pipline for simple php app
 
 ## Setting up Jenkins Controller
 

@@ -1,0 +1,84 @@
+---
+- name: Configure Test Server
+  hosts: test_server
+  become: yes
+
+  vars:
+    project_root: /var/www/php_project
+    server_name: testserver.local
+
+  tasks:
+
+    # -------------------------------
+    # Install Apache2
+    # -------------------------------
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name: Enable Apache modules
+      command: a2enmod rewrite
+
+    # -------------------------------
+    # Install PHP and extensions
+    # -------------------------------
+    - name: Install PHP and modules
+      apt:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-cli
+          - php-curl
+          - php-xml
+          - php-mbstring
+          - php-zip
+          - php-mysql
+        state: present
+
+    # -------------------------------
+    # Create project directory
+    # -------------------------------
+    - name: Create project directory
+      file:
+        path: "{{ project_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: "0755"
+
+    # -------------------------------
+    # Apache Virtual Host
+    # -------------------------------
+    - name: Create Apache virtual host
+      copy:
+        dest: /etc/apache2/sites-available/php_project.conf
+        content: |
+          <VirtualHost *:80>
+              ServerName {{ server_name }}
+
+              DocumentRoot {{ project_root }}
+
+              <Directory {{ project_root }}>
+                  AllowOverride All
+                  Require all granted
+              </Directory>
+
+              ErrorLog ${APACHE_LOG_DIR}/error.log
+              CustomLog ${APACHE_LOG_DIR}/access.log combined
+          </VirtualHost>
+
+    - name: Disable default Apache vhost
+      command: a2dissite 000-default.conf
+      notify: Restart Apache
+
+    - name: Enable project vhost
+      command: a2ensite php_project.conf
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

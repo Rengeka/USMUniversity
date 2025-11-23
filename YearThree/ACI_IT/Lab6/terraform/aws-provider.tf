@@ -8,12 +8,12 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket  = "terraform-bucket-lab6"
-    key     = "env/prod/terraform.tfstate"
-    encrypt = true
-    region  = "eu-central-1"              
-  }
+  # backend "s3" {
+  #   bucket  = "terraform-bucket-lab6"
+  #   key     = "env/prod/terraform.tfstate"
+  #   encrypt = true
+  #   region  = "eu-central-1"              
+  # }
 }
 
 provider "aws" {
