@@ -9,9 +9,6 @@
 
   tasks:
 
-    # -------------------------------
-    # Install Apache2
-    # -------------------------------
     - name: Install Apache2
       apt:
         name: apache2
@@ -21,9 +18,6 @@
     - name: Enable Apache modules
       command: a2enmod rewrite
 
-    # -------------------------------
-    # Install PHP and extensions
-    # -------------------------------
     - name: Install PHP and modules
       apt:
         name:
@@ -37,9 +31,6 @@
           - php-mysql
         state: present
 
-    # -------------------------------
-    # Create project directory
-    # -------------------------------
     - name: Create project directory
       file:
         path: "{{ project_root }}"
@@ -48,9 +39,6 @@
         group: www-data
         mode: "0755"
 
-    # -------------------------------
-    # Apache Virtual Host
-    # -------------------------------
     - name: Create Apache virtual host
       copy:
         dest: /etc/apache2/sites-available/php_project.conf

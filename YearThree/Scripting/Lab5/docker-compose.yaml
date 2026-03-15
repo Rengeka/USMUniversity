@@ -31,19 +31,29 @@ services:
     container_name: ansible-agent
     ports:
       - "2223:22"
-    environment:
-      - JENKINS_AGENT_ANSIBLE_PUBKEY=${JENKINS_AGENT_ANSIBLE_PUBKEY}
     volumes:
-      - jenkins_ansible_agent_volume:/home/ansible
+      - ./ansible:/home/ansible/ansible
+      - ./secrets:/home/ansible/secrets:ro
     depends_on:
       - jenkins-controller
+    networks:
+      - jenkins-network
+
+  
+  test-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.test_server
+    container_name: test-server
+    ports:
+      - "2222:22"
+      - "8088:80"
     networks:
       - jenkins-network
 
 volumes:
   jenkins_home:
   jenkins_ssh_agent_volume:
-  jenkins_ansible_agent_volume:
 
 networks:
   jenkins-network:
